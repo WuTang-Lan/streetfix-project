@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetFix Nairobi - Map View</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+        }
+        .filter-buttons {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btn.active {
+            background: #4a7c59;
+            color: white;
+            border-color: #4a7c59;
+        }
+        .map-instructions {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #4a7c59;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚧 StreetFix Nairobi</h1>
+        <div class="nav-links">
+            <a href="dashboard.html">← Back to Dashboard</a>
+            <button onclick="logout()" class="btn-secondary">Logout</button>
+        </div>
+    </div>
+
+    <h2>🗺️ Issues Map View</h2>
+    <p>View all reported infrastructure issues across Nairobi. Click on markers for details.</p>
+
+    <div class="map-instructions">
+        <strong>💡 How to use:</strong> Click on any marker to see issue details. Use filters below to view specific issue types.
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-buttons">
+        <button class="filter-btn active" onclick="filterIssues('all')">All Issues</button>
+        <button class="filter-btn" onclick="filterIssues('pothole')">🕳️ Potholes</button>
+        <button class="filter-btn" onclick="filterIssues('streetlight')">💡 Street Lights</button>
+        <button class="filter-btn" onclick="filterIssues('trash')">🗑️ Trash Problems</button>
+        <button class="filter-btn" onclick="filterIssues('drainage')">🌊 Drainage</button>
+    </div>
+
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <!-- Error Message -->
+    <div id="mapError" style="display: none;" class="error-message">
+        <strong>⚠️ Map Loading Issue</strong>
+        <p>We couldn't load the map. This is usually because:</p>
+        <ul>
+            <li>No internet connection</li>
+            <li>Google Maps API key needs to be configured</li>
+            <li>Browser location permissions are blocked</li>
+        </ul>
+        <p><small>For development: Add your Google Maps API key to line 76 in map.html</small></p>
+    </div>
+
+    <!-- Issues List -->
+    <div class="reports-section">
+        <h3>📋 All Reported Issues</h3>
+        <div id="allIssuesList" class="reports-list">
+            <!-- Issues will be listed here -->
+        </div>
+    </div>
+</div>
+
+<!-- Google Maps - ADD YOUR API KEY HERE -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+<script src="script.js"></script>
+<script>
+    let map;
+    let markers = [];
+    const nairobiCenter = { lat: -1.2921, lng: 36.8219 };
+
+    function initMap() {
+        try {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: nairobiCenter,
+                zoom: 12,
+                styles: [
+                    {
+                        "featureType": "administrative",
+                        "elementType": "labels.text.fill",
+                        "stylers": [{"color": "#444444"}]
+                    }
+                ]
+            });
+            loadIssuesOnMap();
+            document.getElementById('mapError').style.display = 'none';
+        } catch (error) {
+            console.error('Map error:', error);
+            document.getElementById('mapError').style.display = 'block';
+            loadIssuesList(); // Fallback to list view
+        }
+    }
+
+    function loadIssuesOnMap(filter = 'all') {
+        // Clear existing markers
+        markers.forEach(marker => marker.setMap(null));
+        markers = [];
+
+        const issues = getIssuesFromStorage();
+        const filteredIssues = filter === 'all' ? issues : issues.filter(issue => issue.issue_type === filter);
+
+        filteredIssues.forEach(issue => {
+            const position = issue.latitude && issue.longitude ?
+                { lat: issue.latitude, lng: issue.longitude } : nairobiCenter;
+
+            const marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: issue.title,
+                icon: getMarkerIcon(issue.issue_type)
+            });
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div style="padding: 10px; max-width: 250px;">
+                        <h4 style="margin: 0 0 10px 0; color: #2c5530;">${issue.title}</h4>
+                        <p style="margin: 5px 0;"><strong>Type:</strong> ${getIssueTypeIcon(issue.issue_type)} ${issue.issue_type}</p>
+                        <p style="margin: 5px 0;"><strong>Status:</strong> <span style="color: ${getStatusColor(issue.status)}">${issue.status}</span></p>
+                        <p style="margin: 5px 0;"><strong>Location:</strong> ${issue.location}</p>
+                        <p style="margin: 5px 0;"><strong>Reported by:</strong> ${issue.user_name}</p>
+                        <p style="margin: 5px 0;"><small>${new Date(issue.created_at).toLocaleDateString()}</small></p>
+                    </div>
+                `
+            });
+
+            marker.addListener('click', () => {
+                infoWindow.open(map, marker);
+            });
+
+            markers.push(marker);
+        });
+    }
+
+    function getMarkerIcon(issueType) {
+        const icons = {
+            pothole: '🕳️',
+            streetlight: '💡',
+            trash: '🗑️',
+            drainage: '🌊',
+            other: '❓'
+        };
+        return null; // Use default marker
+    }
+
+    function getIssueTypeIcon(issueType) {
+        const icons = {
+            pothole: '🕳️',
+            streetlight: '💡',
+            trash: '🗑️',
+            drainage: '🌊',
+            other: '❓'
+        };
+        return icons[issueType] || '❓';
+    }
+
+    function getStatusColor(status) {
+        const colors = {
+            pending: '#ffa500',
+            inprogress: '#007bff',
+            resolved: '#28a745'
+        };
+        return colors[status] || '#6c757d';
+    }
+
+    function filterIssues(type) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        loadIssuesOnMap(type);
+    }
+
+    function loadIssuesList() {
+        const issuesList = document.getElementById('allIssuesList');
+        const issues = getIssuesFromStorage();
+
+        if (issues.length === 0) {
+            issuesList.innerHTML = '<p>No issues reported yet. <a href="report.html">Be the first to report one!</a></p>';
+            return;
+        }
+
+        issuesList.innerHTML = issues.map(issue => `
+            <div class="report-item">
+                <div>
+                    <strong>${getIssueTypeIcon(issue.issue_type)} ${issue.title}</strong>
+                    <p>${issue.description.substring(0, 100)}...</p>
+                    <small>📍 ${issue.location} • 👤 ${issue.user_name} • 📅 ${new Date(issue.created_at).toLocaleDateString()}</small>
+                </div>
+                <span class="report-status status-${issue.status}">
+                    ${issue.status}
+                </span>
+            </div>
+        `).join('');
+    }
+
+    // Fallback if maps fail
+    if (typeof google === 'undefined') {
+        document.getElementById('mapError').style.display = 'block';
+        loadIssuesList();
+    }
+</script>
+</body>
+</html>

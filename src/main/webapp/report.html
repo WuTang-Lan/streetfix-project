@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetFix Nairobi - Report Issue</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚧 StreetFix Nairobi</h1>
+        <div class="nav-links">
+            <a href="dashboard.html">← Back to Dashboard</a>
+            <button onclick="logout()" class="btn-secondary">Logout</button>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h2>📋 Report an Issue</h2>
+
+        <form id="issueForm">
+            <!-- Issue Type -->
+            <div class="form-group">
+                <label>What type of issue is this?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="issueType" value="pothole" required> 🕳️ Pothole</label>
+                    <label><input type="radio" name="issueType" value="streetlight"> 💡 Street Light</label>
+                    <label><input type="radio" name="issueType" value="trash"> 🗑️ Trash Problem</label>
+                    <label><input type="radio" name="issueType" value="drainage"> 🌊 Drainage</label>
+                    <label><input type="radio" name="issueType" value="other"> ❓ Other</label>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Brief Title</label>
+                <input type="text" id="title" placeholder="e.g., Large pothole on Moi Avenue" maxlength="100" required>
+                <div class="char-count"><span id="titleCount">0</span>/100 characters</div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" placeholder="Please describe the issue in detail. Include specific location details and any safety concerns..." maxlength="500" required></textarea>
+                <div class="char-count"><span id="descCount">0</span>/500 characters</div>
+            </div>
+
+            <!-- Location -->
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="Enter street name, area, or landmark" required>
+                <button type="button" onclick="getCurrentLocation()" class="btn-secondary">📍 Use My Current Location</button>
+                <div id="locationStatus">Location not yet captured</div>
+            </div>
+
+            <!-- Photo -->
+            <div class="form-group">
+                <label for="photo">Photo Evidence (Optional but helpful)</label>
+                <input type="file" id="photo" accept="image/*" capture="camera">
+                <small>📸 Take a photo or upload from your device</small>
+            </div>
+
+            <!-- Submit -->
+            <div class="form-actions">
+                <button type="button" onclick="navigateTo('dashboard.html')" class="btn-secondary">Cancel</button>
+                <button type="submit" class="btn-primary">Submit Report</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    document.getElementById('title').addEventListener('input', function() {
+        document.getElementById('titleCount').textContent = this.value.length;
+    });
+
+    document.getElementById('description').addEventListener('input', function() {
+        document.getElementById('descCount').textContent = this.value.length;
+    });
+</script>
+</body>
+</html>

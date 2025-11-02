@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetFix Nairobi - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚧 StreetFix Nairobi</h1>
+        <div class="user-info">
+            <span id="welcomeMessage">Welcome back!</span>
+            <button onclick="logout()" class="btn-secondary">Logout</button>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div class="stat-number" id="totalReports">0</div>
+            <div class="stat-label">Total Reports</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-number" id="pendingReports">0</div>
+            <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🔄</div>
+            <div class="stat-number" id="inProgressReports">0</div>
+            <div class="stat-label">In Progress</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-number" id="resolvedReports">0</div>
+            <div class="stat-label">Resolved</div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="actions-grid">
+        <div class="action-card" onclick="navigateTo('report.html')">
+            <div class="action-icon">📝</div>
+            <h3>Report New Issue</h3>
+            <p>Submit a new infrastructure problem</p>
+        </div>
+        <div class="action-card" onclick="navigateTo('map.html')">
+            <div class="action-icon">🗺️</div>
+            <h3>View Issues Map</h3>
+            <p>See all reported issues in Nairobi</p>
+        </div>
+        <div class="action-card">
+            <div class="action-icon">⭐</div>
+            <h3>My Impact</h3>
+            <p id="userImpact">0 issues reported</p>
+        </div>
+    </div>
+
+    <!-- Recent Reports -->
+    <div class="reports-section">
+        <h3>My Recent Reports</h3>
+        <div id="userReportsList" class="reports-list">
+            <!-- Reports will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadDashboardData();
+    });
+</script>
+</body>
+</html>
