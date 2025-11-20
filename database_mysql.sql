@@ -31,10 +31,12 @@ CREATE TABLE IF NOT EXISTS issues (
 );
 
 -- Insert sample data for testing
+-- Passwords are BCrypt hashed (work factor: 12)
+-- Original passwords: admin123, password123, password123
 INSERT INTO users (full_name, email, password) VALUES
-('Admin User', 'admin@streetfix.co.ke', 'admin123'),
-('John Kamau', 'john@example.com', 'password123'),
-('Mary Wanjiku', 'mary@example.com', 'password123');
+('Admin User', 'admin@streetfix.co.ke', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5eU7QvzqTEhKC'),
+('John Kamau', 'john@example.com', '$2a$12$7FuZl.vGQXSsDwT4wPkO3.TN5VbNXU6T3jF3bUO3gkd9x.LvR8fxK'),
+('Mary Wanjiku', 'mary@example.com', '$2a$12$7FuZl.vGQXSsDwT4wPkO3.TN5VbNXU6T3jF3bUO3gkd9x.LvR8fxK');
 
 INSERT INTO issues (user_id, title, description, issue_type, location, latitude, longitude, status) VALUES
 (2, 'Pothole on Kenyatta Avenue', 'Large pothole causing traffic issues', 'Road Damage', 'Kenyatta Avenue, Nairobi', -1.286389, 36.817223, 'pending'),

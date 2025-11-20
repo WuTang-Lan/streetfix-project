@@ -34,6 +34,15 @@ src/main/
 
 ## Recent Changes (November 20, 2025)
 
+### CRITICAL Security Update
+- **BCrypt Password Hashing**: Implemented secure password hashing (work factor 12)
+- **No Plaintext Passwords**: All passwords stored as one-way BCrypt hashes
+- **Secure Login Response**: Passwords excluded from JSON API responses
+- **SQL Injection Prevention**: PreparedStatements used throughout
+- **Session Management**: 30-minute timeout with secure server-side sessions
+- **Database Schema**: Updated sample data with properly hashed passwords
+- **Security Documentation**: Comprehensive SECURITY.md added with deployment guidelines
+
 ### Modern Color Theme Update
 - **Login Page**: Deep navy gradient background (#0f172a → #1e293b → #334155) with bright cyan accents (#0ea5e9, #06b6d4)
 - **Registration Page**: Teal gradient background (#134e4a → #0f766e → #14b8a6) with turquoise accents
@@ -65,6 +74,7 @@ src/main/
 ### Dependencies Updated
 - Added PostgreSQL JDBC driver (42.6.0)
 - Added MySQL Connector (com.mysql:mysql-connector-j:8.0.33)
+- Added jBCrypt 0.4 (BCrypt password hashing)
 - Configured embedded Tomcat dependencies
 - Dual database driver support
 

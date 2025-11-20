@@ -41,9 +41,16 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 session.setMaxInactiveInterval(30 * 60); // 30 minutes
 
+                // Create safe user data without password
+                Map<String, Object> userData = new HashMap<>();
+                userData.put("id", user.getId());
+                userData.put("fullName", user.getFullName());
+                userData.put("email", user.getEmail());
+                userData.put("createdAt", user.getCreatedAt().toString());
+
                 result.put("success", true);
                 result.put("message", "Login successful");
-                result.put("user", user);
+                result.put("user", userData);
             } else {
                 result.put("success", false);
                 result.put("message", "Invalid email or password");
