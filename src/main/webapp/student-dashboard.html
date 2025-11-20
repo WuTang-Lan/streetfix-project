@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetFix Nairobi - Student Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚧 StreetFix Nairobi - Student Portal</h1>
+        <div class="user-info">
+            <span id="welcomeMessage">Welcome, Student!</span>
+            <button onclick="logout()" class="btn-secondary">Logout</button>
+        </div>
+    </div>
+
+    <div class="actions-grid">
+        <div class="action-card" onclick="navigateTo('report.html')">
+            <div class="action-icon">📝</div>
+            <h3>Report New Issue</h3>
+            <p>Submit a new infrastructure problem in your community</p>
+            <p class="card-detail">Click here to file a report</p>
+        </div>
+        
+        <div class="action-card" onclick="navigateTo('map.html')">
+            <div class="action-icon">📍</div>
+            <h3>Track Your Reports</h3>
+            <p>Monitor the status and progress of your submitted issues</p>
+            <p class="card-detail">View all your reports and their updates</p>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div class="stat-number" id="totalReports">0</div>
+            <div class="stat-label">Your Total Reports</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-number" id="pendingReports">0</div>
+            <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-number" id="resolvedReports">0</div>
+            <div class="stat-label">Resolved</div>
+        </div>
+    </div>
+
+    <div class="reports-section">
+        <h3>My Recent Reports</h3>
+        <div id="userReportsList" class="reports-list">
+            <!-- Reports will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadDashboardData();
+    });
+</script>
+</body>
+</html>

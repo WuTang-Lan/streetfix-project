@@ -36,3 +36,8 @@ externalPort = 80
 [[ports]]
 localPort = 41855
 externalPort = 3000
+
+[deployment]
+deploymentTarget = "vm"
+run = ["mvn", "compile", "exec:java"]
+build = ["mvn", "clean", "package"]

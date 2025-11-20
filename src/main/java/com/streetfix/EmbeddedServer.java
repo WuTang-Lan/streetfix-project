@@ -3,6 +3,7 @@ package com.streetfix;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
+import org.apache.catalina.servlets.DefaultServlet;
 import com.streetfix.servlet.RegisterServlet;
 import com.streetfix.servlet.LoginServlet;
 import com.streetfix.servlet.IssueServlet;
@@ -19,17 +20,22 @@ public class EmbeddedServer {
         String webappDir = new File("src/main/webapp").getAbsolutePath();
         Context context = tomcat.addContext("", webappDir);
 
-        tomcat.addServlet("", "RegisterServlet", new RegisterServlet());
+        Tomcat.addServlet(context, "default", new DefaultServlet());
+        context.addServletMappingDecoded("/", "default");
+
+        Tomcat.addServlet(context, "RegisterServlet", new RegisterServlet());
         context.addServletMappingDecoded("/register", "RegisterServlet");
 
-        tomcat.addServlet("", "LoginServlet", new LoginServlet());
+        Tomcat.addServlet(context, "LoginServlet", new LoginServlet());
         context.addServletMappingDecoded("/login", "LoginServlet");
 
-        tomcat.addServlet("", "IssueServlet", new IssueServlet());
+        Tomcat.addServlet(context, "IssueServlet", new IssueServlet());
         context.addServletMappingDecoded("/issues", "IssueServlet");
 
-        tomcat.addServlet("", "DashboardServlet", new DashboardServlet());
+        Tomcat.addServlet(context, "DashboardServlet", new DashboardServlet());
         context.addServletMappingDecoded("/dashboard", "DashboardServlet");
+
+        context.addWelcomeFile("index.html");
 
         tomcat.getConnector();
         

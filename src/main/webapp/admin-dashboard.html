@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetFix Nairobi - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚧 StreetFix Nairobi - Admin Portal</h1>
+        <div class="user-info">
+            <span id="welcomeMessage">Welcome, Administrator!</span>
+            <button onclick="logout()" class="btn-secondary">Logout</button>
+        </div>
+    </div>
+
+    <div class="actions-grid">
+        <div class="action-card" onclick="alert('Manage all reports')">
+            <div class="action-icon">📋</div>
+            <h3>Manage All Reports</h3>
+            <p>View, update, and resolve community infrastructure reports</p>
+            <p class="card-detail">Access the full reports management system</p>
+        </div>
+        
+        <div class="action-card" onclick="navigateTo('map.html')">
+            <div class="action-icon">🗺️</div>
+            <h3>Track All Issues</h3>
+            <p>Monitor all reported issues across Nairobi on the map</p>
+            <p class="card-detail">View live status and locations</p>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div class="stat-number" id="totalReports">0</div>
+            <div class="stat-label">Total Community Reports</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-number" id="pendingReports">0</div>
+            <div class="stat-label">Awaiting Review</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🔄</div>
+            <div class="stat-number" id="inProgressReports">0</div>
+            <div class="stat-label">In Progress</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-number" id="resolvedReports">0</div>
+            <div class="stat-label">Resolved</div>
+        </div>
+    </div>
+
+    <div class="reports-section">
+        <h3>Recent Community Reports</h3>
+        <div class="admin-actions">
+            <button class="btn-primary" onclick="alert('Filter reports')">Filter Reports</button>
+            <button class="btn-primary" onclick="alert('Export data')">Export Data</button>
+            <button class="btn-primary" onclick="alert('Generate analytics')">View Analytics</button>
+        </div>
+        <div id="userReportsList" class="reports-list">
+            <!-- Reports will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadDashboardData();
+    });
+</script>
+</body>
+</html>
