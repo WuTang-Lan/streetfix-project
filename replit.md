@@ -58,6 +58,20 @@ src/main/
 - Configured embedded Tomcat dependencies
 - Removed MySQL connector dependency
 
+## Database Compatibility
+
+**The application now supports BOTH databases:**
+- **MySQL** (for XAMPP local development)
+- **PostgreSQL** (for Replit hosted environment)
+
+The application automatically detects which database to use:
+- If `MYSQL_HOST` environment variable is set → Uses MySQL
+- If `DATABASE_URL` or `PGHOST` is set → Uses PostgreSQL
+
+### XAMPP Setup
+For local development with XAMPP, see `XAMPP_SETUP.md` for detailed instructions.
+Use the `database_mysql.sql` file to create the MySQL database schema.
+
 ## Database Schema
 
 ### Users Table
