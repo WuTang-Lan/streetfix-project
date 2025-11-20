@@ -22,6 +22,7 @@
             <h3>Report New Issue</h3>
             <p>Submit a new infrastructure problem in your community</p>
             <p class="card-detail">Click here to file a report</p>
+            <span class="badge new">Quick Action</span>
         </div>
         
         <div class="action-card" onclick="navigateTo('map.html')">
@@ -29,6 +30,7 @@
             <h3>Track Your Reports</h3>
             <p>Monitor the status and progress of your submitted issues</p>
             <p class="card-detail">View all your reports and their updates</p>
+            <span class="badge">Live Updates</span>
         </div>
     </div>
 
@@ -37,16 +39,66 @@
             <div class="stat-icon">📊</div>
             <div class="stat-number" id="totalReports">0</div>
             <div class="stat-label">Your Total Reports</div>
+            <div class="stat-progress">
+                <div class="stat-progress-bar" style="width: 75%"></div>
+            </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon">⏳</div>
             <div class="stat-number" id="pendingReports">0</div>
             <div class="stat-label">Pending</div>
+            <div class="stat-progress">
+                <div class="stat-progress-bar" style="width: 45%"></div>
+            </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon">✅</div>
             <div class="stat-number" id="resolvedReports">0</div>
             <div class="stat-label">Resolved</div>
+            <div class="stat-progress">
+                <div class="stat-progress-bar" style="width: 85%"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification-center">
+        <div class="notification-header">
+            <h3>🔔 Your Updates</h3>
+            <span class="notification-badge">2 New</span>
+        </div>
+        <div class="notification-item unread">
+            <strong>Report Update</strong>
+            <p style="margin: 0.5rem 0 0 0; color: #666; font-size: 0.9rem;">Your pothole report is now in progress</p>
+        </div>
+        <div class="notification-item unread">
+            <strong>Issue Resolved</strong>
+            <p style="margin: 0.5rem 0 0 0; color: #666; font-size: 0.9rem;">Streetlight repair completed - Thank you for reporting!</p>
+        </div>
+    </div>
+
+    <div class="search-filter-section">
+        <div class="search-box">
+            <input type="text" placeholder="Search your reports...">
+        </div>
+        <div class="filter-buttons">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Pending</button>
+            <button class="filter-btn">Resolved</button>
+        </div>
+    </div>
+
+    <div class="quick-stats-panel">
+        <div class="quick-stat">
+            <div class="quick-stat-number">12</div>
+            <div class="quick-stat-label">Total Reports</div>
+        </div>
+        <div class="quick-stat">
+            <div class="quick-stat-number">8</div>
+            <div class="quick-stat-label">Resolved</div>
+        </div>
+        <div class="quick-stat">
+            <div class="quick-stat-number">67%</div>
+            <div class="quick-stat-label">Success Rate</div>
         </div>
     </div>
 

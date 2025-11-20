@@ -22,6 +22,7 @@
             <h3>Manage All Reports</h3>
             <p>View, update, and resolve community infrastructure reports</p>
             <p class="card-detail">Access the full reports management system</p>
+            <span class="badge new">Admin Only</span>
         </div>
         
         <div class="action-card" onclick="navigateTo('map.html')">
@@ -29,6 +30,7 @@
             <h3>Track All Issues</h3>
             <p>Monitor all reported issues across Nairobi on the map</p>
             <p class="card-detail">View live status and locations</p>
+            <span class="badge">Real-time</span>
         </div>
     </div>
 
@@ -37,30 +39,92 @@
             <div class="stat-icon">📊</div>
             <div class="stat-number" id="totalReports">0</div>
             <div class="stat-label">Total Community Reports</div>
+            <div class="stat-progress">
+                <div class="stat-progress-bar" style="width: 90%"></div>
+            </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon">⏳</div>
             <div class="stat-number" id="pendingReports">0</div>
             <div class="stat-label">Awaiting Review</div>
+            <div class="stat-progress">
+                <div class="stat-progress-bar" style="width: 35%"></div>
+            </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon">🔄</div>
             <div class="stat-number" id="inProgressReports">0</div>
             <div class="stat-label">In Progress</div>
+            <div class="stat-progress">
+                <div class="stat-progress-bar" style="width: 55%"></div>
+            </div>
         </div>
         <div class="stat-card">
             <div class="stat-icon">✅</div>
             <div class="stat-number" id="resolvedReports">0</div>
             <div class="stat-label">Resolved</div>
+            <div class="stat-progress">
+                <div class="stat-progress-bar" style="width: 88%"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification-center">
+        <div class="notification-header">
+            <h3>🔔 Notifications</h3>
+            <span class="notification-badge">3 New</span>
+        </div>
+        <div class="notification-item unread">
+            <strong>New Report Submitted</strong>
+            <p style="margin: 0.5rem 0 0 0; color: #666; font-size: 0.9rem;">Pothole on Kenyatta Avenue needs review</p>
+        </div>
+        <div class="notification-item unread">
+            <strong>Issue Escalated</strong>
+            <p style="margin: 0.5rem 0 0 0; color: #666; font-size: 0.9rem;">Streetlight malfunction - High Priority</p>
+        </div>
+        <div class="notification-item">
+            <strong>Report Resolved</strong>
+            <p style="margin: 0.5rem 0 0 0; color: #666; font-size: 0.9rem;">Drainage issue on Moi Avenue completed</p>
+        </div>
+    </div>
+
+    <div class="search-filter-section">
+        <div class="search-box">
+            <input type="text" placeholder="Search reports by location, type, or ID...">
+        </div>
+        <div class="filter-buttons">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Pending</button>
+            <button class="filter-btn">In Progress</button>
+            <button class="filter-btn">Resolved</button>
+        </div>
+    </div>
+
+    <div class="quick-stats-panel">
+        <div class="quick-stat">
+            <div class="quick-stat-number">24h</div>
+            <div class="quick-stat-label">Avg Response</div>
+        </div>
+        <div class="quick-stat">
+            <div class="quick-stat-number">89%</div>
+            <div class="quick-stat-label">Resolution Rate</div>
+        </div>
+        <div class="quick-stat">
+            <div class="quick-stat-number">47</div>
+            <div class="quick-stat-label">This Week</div>
+        </div>
+        <div class="quick-stat">
+            <div class="quick-stat-number">4.8★</div>
+            <div class="quick-stat-label">User Rating</div>
         </div>
     </div>
 
     <div class="reports-section">
         <h3>Recent Community Reports</h3>
         <div class="admin-actions">
-            <button class="btn-primary" onclick="alert('Filter reports')">Filter Reports</button>
-            <button class="btn-primary" onclick="alert('Export data')">Export Data</button>
-            <button class="btn-primary" onclick="alert('Generate analytics')">View Analytics</button>
+            <button class="btn-primary" onclick="alert('Export data')">📊 Export Data</button>
+            <button class="btn-primary" onclick="alert('Generate analytics')">📈 View Analytics</button>
+            <button class="btn-primary" onclick="alert('Send notifications')">📧 Send Notification</button>
         </div>
         <div id="userReportsList" class="reports-list">
             <!-- Reports will be loaded here -->
