@@ -34,6 +34,13 @@ src/main/
 
 ## Recent Changes (November 20, 2025)
 
+### Modern Color Theme Update
+- **Login Page**: Deep navy gradient background (#0f172a → #1e293b → #334155) with bright cyan accents (#0ea5e9, #06b6d4)
+- **Registration Page**: Teal gradient background (#134e4a → #0f766e → #14b8a6) with turquoise accents
+- **Color Scheme**: Modern tech-forward palette with navy blues, cyans, and teals
+- **UI Elements**: Updated all buttons, icons, and accents to match new color theme
+- **Success/Error Messages**: Added animated notification system with gradient backgrounds
+
 ### Database Migration
 - Migrated from MySQL (XAMPP local DB) to PostgreSQL
 - Updated `DatabaseConnection.java` to use environment variables
@@ -52,6 +59,8 @@ src/main/
   - **Admin Dashboard**: For managing all community reports
 - Improved action cards (3.5rem padding, 300px min-height)
 - Enhanced hover effects and animations
+- Glassmorphism design with backdrop blur effects
+- Password strength meter on registration page
 
 ### Dependencies Updated
 - Added PostgreSQL JDBC driver (42.6.0)
