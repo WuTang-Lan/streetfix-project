@@ -37,3 +37,17 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Tomcat ###
+tomcat.*/
+work/
+logs/
+
+### Database ###
+*.db
+*.sqlite
+
+### Temporary Files ###
+attached_assets/
+*.tmp
+*.log
