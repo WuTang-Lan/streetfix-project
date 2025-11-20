@@ -55,8 +55,9 @@ src/main/
 
 ### Dependencies Updated
 - Added PostgreSQL JDBC driver (42.6.0)
+- Added MySQL Connector (com.mysql:mysql-connector-j:8.0.33)
 - Configured embedded Tomcat dependencies
-- Removed MySQL connector dependency
+- Dual database driver support
 
 ## Database Compatibility
 
@@ -67,6 +68,15 @@ src/main/
 The application automatically detects which database to use:
 - If `MYSQL_HOST` environment variable is set → Uses MySQL
 - If `DATABASE_URL` or `PGHOST` is set → Uses PostgreSQL
+
+### PostgreSQL URL Schemes Supported
+The application now supports ALL common PostgreSQL DATABASE_URL formats:
+- `postgres://user:pass@host:port/db` (Standard)
+- `postgresql://user:pass@host:port/db` (Alternative)
+- `jdbc:postgresql://host:port/db` (JDBC format)
+- Automatic credential URL decoding
+- Query parameter preservation
+- Port defaulting to 5432
 
 ### XAMPP Setup
 For local development with XAMPP, see `XAMPP_SETUP.md` for detailed instructions.
@@ -162,6 +172,16 @@ The application uses programmatic servlet registration to avoid web.xml parsing 
 
 ### Database Connection
 The application dynamically reads PostgreSQL credentials from environment variables and supports both DATABASE_URL format and individual credential format.
+
+## Documentation Files
+
+The project includes comprehensive documentation:
+- **README.md** - Project overview and quick start
+- **XAMPP_SETUP.md** - Complete XAMPP installation and configuration guide
+- **INTELLIJ_SETUP.md** - Step-by-step IntelliJ IDEA setup instructions
+- **FEATURES.md** - Complete feature list and technical documentation
+- **database_mysql.sql** - MySQL database schema with sample data
+- **replit.md** - This file (technical architecture and preferences)
 
 ## Future Enhancements
 - Role-based authentication (admin vs. student)
